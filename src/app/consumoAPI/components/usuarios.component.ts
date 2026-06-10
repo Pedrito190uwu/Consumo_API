@@ -14,8 +14,13 @@ export class UsuariosComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe(data => {
-      this.usuarios = data;
+    this.userService.getUsers().subscribe({
+      next: (data) => {
+        this.usuarios = data;
+      },
+      error: (err) => {
+        console.error('Error al consumir la API', err);
+      }
     });
   }
 }
